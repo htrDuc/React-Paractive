@@ -10,6 +10,9 @@ import {
   CardTitle,
   Button,
 } from "reactstrap";
+
+import { CartContext } from "../Contexts/Cart";
+
 export class Products extends Component {
   constructor(props) {
     super(props);
@@ -178,7 +181,10 @@ export class Products extends Component {
                 <CardBody>
                   <CardTitle tag="h5">{product.title}</CardTitle>
                   <CardText>{product.description}</CardText>
-                  <Button>Add to cart</Button>
+                  <CartContext.Consumer>
+                    {({addToCart}) => <Button onClick={addToCart}>Add to cart</Button>}
+            
+                  </CartContext.Consumer>
                 </CardBody>
               </Card>
             </Col>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -6,11 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
-} from 'reactstrap';
-import {
-    Link
-} from "react-router-dom";
+  NavLink,
+} from "reactstrap";
+import { Link } from "react-router-dom";
+
+import {CartContext} from "../Contexts/Cart"
 
 const Example = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,13 +25,20 @@ const Example = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink >
-                  <Link to = "/">Home</Link>
+              <NavLink>
+                <Link to="/">Home</Link>
               </NavLink>
             </NavItem>
             <NavItem>
-            <NavLink >
-                  <Link to = "/products">Products</Link>
+              <NavLink>
+                <Link to="/products">Products</Link>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>
+                <CartContext.Consumer>
+                  {({cartItems}) =><Link to="/products">Cart ({cartItems.length})</Link> }
+                </CartContext.Consumer>
               </NavLink>
             </NavItem>
           </Nav>
@@ -39,6 +46,6 @@ const Example = (props) => {
       </Navbar>
     </div>
   );
-}
+};
 
 export default Example;
